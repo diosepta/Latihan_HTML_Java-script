@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopwatch Keren</title>
+    <style>
+        /* Gaya dasar halaman */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Gradasi warna biru muda */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #2c3e50;
+        }
+
+        /* Gaya untuk kontainer utama stopwatch */
+        .stopwatch-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        /* Gaya untuk tampilan waktu */
+        #display {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 6em;
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            min-width: 200px; /* Memastikan ruang yang cukup */
+        }
+
+        /* Gaya untuk grup tombol */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Gaya untuk setiap tombol */
+        button {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Gaya untuk tombol Start */
+        #start-btn {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+        }
+
+        /* Gaya untuk tombol Stop */
+        #stop-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        }
+
+        /* Gaya untuk tombol Reset */
+        #reset-btn {
+            background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stopwatch-container">
+        <h1>Stopwatch Detik</h1>
+        <div id="display">0</div>
+        <div class="controls">
+            <button id="start-btn">Start</button>
+            <button id="stop-btn">Stop</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript untuk logika stopwatch
+        let seconds = 0;
+        let timerInterval = null;
+        let isRunning = false;
+
+        const display = document.getElementById('display');
+        const startBtn = document.getElementById('start-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const resetBtn = document.getElementById('reset-btn');
+
+        // Fungsi untuk memperbarui tampilan waktu
+        function updateDisplay() {
+            display.textContent = seconds;
+        }
+
+        // Fungsi untuk memulai stopwatch
+        function startTimer() {
+            if (!isRunning) {
+                // Perbarui setiap 1 detik
+                timerInterval = setInterval(() => {
+                    seconds++;
+                    updateDisplay();
+                }, 1000);
+                isRunning = true;
+            }
+        }
+
+        // Fungsi untuk menghentikan stopwatch
+        function stopTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+        }
+
+        // Fungsi untuk mereset stopwatch
+        function resetTimer() {
+            stopTimer();
+            seconds = 0;
+            updateDisplay();
+        }
+
+        // Menambahkan event listener ke tombol
+        startBtn.addEventListener('click', startTimer);
+        stopBtn.addEventListener('click', stopTimer);
+        resetBtn.addEventListener('click', resetTimer);
+    </script>
+</body>
+</html>
