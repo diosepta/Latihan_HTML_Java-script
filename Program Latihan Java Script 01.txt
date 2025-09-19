@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Kalkulator Sederhana - Gaya Gelap</title>
+    <style>
+        /* Gaya dasar untuk body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a2e; /* Latar belakang gelap */
+            color: #e0e0e0; /* Warna teks terang */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Memastikan body mengisi seluruh tinggi viewport */
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box; /* Agar padding tidak menyebabkan overflow */
+        }
+
+        /* Gaya untuk kontainer utama kalkulator */
+        .calculator-container {
+            background-color: #2e2e4a; /* Warna background kontainer */
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Bayangan untuk efek kedalaman */
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #92e6e6; /* Warna judul yang lebih cerah */
+            margin-bottom: 20px;
+            font-size: 2.2em;
+        }
+
+        p {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Gaya untuk tombol */
+        button {
+            background-color: #8d44ad; /* Warna ungu untuk tombol */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Transisi halus */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button:hover {
+            background-color: #a752c5; /* Warna ungu sedikit lebih terang saat hover */
+            transform: translateY(-2px); /* Efek sedikit terangkat saat hover */
+        }
+
+        button:active {
+            transform: translateY(0); /* Kembali ke posisi semula saat diklik */
+            background-color: #7b3d96; /* Warna sedikit lebih gelap saat aktif */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-container">
+        <h1>Kalkulator Sederhana</h1>
+        <p>Aplikasi kalkulator ini akan meminta Anda memasukkan angka dan operator menggunakan kotak prompt, lalu menampilkan hasilnya dalam kotak alert.</p>
+
+        <button onclick="hitung()">Mulai Kalkulator</button>
+    </div>
+
+    <script>
+        function hitung() {
+            let angka1Input = prompt("Masukkan angka pertama:");
+            // Jika pengguna membatalkan prompt, hentikan fungsi
+            if (angka1Input === null) return;
+
+            let operatorInput = prompt("Masukkan operator (+, -, *, /):");
+            if (operatorInput === null) return;
+
+            let angka2Input = prompt("Masukkan angka kedua:");
+            if (angka2Input === null) return;
+
+            // Konversi string ke angka
+            let angka1 = parseFloat(angka1Input);
+            let angka2 = parseFloat(angka2Input);
+
+            // Validasi input
+            if (isNaN(angka1) || isNaN(angka2)) {
+                alert("Input tidak valid! Pastikan Anda memasukkan angka.");
+                return;
+            }
+
+            let hasil;
+
+            if (operatorInput === '+') {
+                hasil = angka1 + angka2;
+            } else if (operatorInput === '-') {
+                hasil = angka1 - angka2;
+            } else if (operatorInput === '*') {
+                hasil = angka1 * angka2;
+            } else if (operatorInput === '/') {
+                if (angka2 === 0) {
+                    alert("Error! Pembagian dengan nol tidak diizinkan.");
+                    return;
+                }
+                hasil = angka1 / angka2;
+            } else {
+                alert("Error! Operator tidak valid. Gunakan +, -, *, atau /.");
+                return;
+            }
+
+            alert("Hasilnya adalah: " + hasil);
+        }
+    </script>
+
+</body>
+</html>
